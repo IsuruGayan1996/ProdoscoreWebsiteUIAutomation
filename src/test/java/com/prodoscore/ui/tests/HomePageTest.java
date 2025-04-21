@@ -54,6 +54,12 @@ public class HomePageTest extends BaseTestObject {
             // Click on the YouTube close button
             homePage.clickYtVidCloseBtn();
 
+            // Wait for the player to be hidden
+            homePage.waitUntilPlayerHidden();
+
+            // Verify the player is hidden;
+            softAssert.assertFalse(homePage.isPlayerDisplayed(), "Player is still displayed");
+
             //Check for any soft assert failures
             softAssert.assertAll();
         } catch (Exception e) {

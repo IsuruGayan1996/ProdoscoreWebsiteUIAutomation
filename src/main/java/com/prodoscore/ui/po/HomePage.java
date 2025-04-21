@@ -37,12 +37,12 @@ public class HomePage extends BasePageObject {
         return isDisplayed(player);
     }
 
-    public String getIFrameSrc() {
-        return getAttribute(iFrame, "src");
+    public void waitUntilPlayerHidden(){
+        waitToBeHidden(player);
     }
 
-    public int numberOfIFrames() {
-        return cDriver.findElements(iFrame).size();
+    public String getIFrameSrc() {
+        return getAttribute(iFrame, "src");
     }
 
     public void switchToIFrame() {
@@ -59,17 +59,5 @@ public class HomePage extends BasePageObject {
 
     public void clickYtVidCloseBtn() {
         click(ytVidCloseBtn);
-    }
-
-    public boolean isDisplayYtVidCloseBtn() {
-        return isDisplayed(player);
-    }
-
-    public boolean isEnableYtVidCloseBtn() {
-        return isEnabled(player);
-    }
-
-    public boolean isHiddenYtVidCloseBtn() {
-        return isHidden(player);
     }
 }
