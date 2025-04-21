@@ -17,6 +17,9 @@ public class HomePageTest extends BaseTestObject {
         try {
             //Login to the application
             homePage = HomePageFunction.goToHomePage(urlData.get("homePageUrl"));
+
+            // Check if the popup content is displayed and close it if it is
+            homePage.popupContentHandle();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -25,13 +28,101 @@ public class HomePageTest extends BaseTestObject {
     @TestCaseID(id = "QA-TC-133", description = "Test")
     @TestCaseType(types = {TestType.FUNCTIONAL})
     @Test(priority = 1)
-    public void VerifyHistogramChartLabelAccuracy() {
+    public void validateProdoVideoFunctionality() {
         try {
-            // Check if the popup content is displayed and close it if it is
-            homePage.popupContentHandle();
+            // Click on the Prodo Video button
+            homePage.clickProdoVidCircleBtn();
 
+            // Wait for the player to load
+            homePage.waitUntilPlayerDisplayed();
+
+            // Verify the player is displayed
+            softAssert.assertTrue(homePage.isPlayerDisplayed(), "Player is not displayed");
+
+            // Verify iframe (Youtube) is loaded
+            softAssert.assertTrue(homePage.getIFrameSrc().contains("youtube"), "Iframe is not loaded");
+
+            // Switch to the iframe
+            homePage.switchToIFrame();
+
+            // Verify the video state
+            softAssert.assertTrue(homePage.isYtVidPlyBtnDisplayed(), "YouTube play button is not displayed");
+
+            // Switch back to the default content
+            homePage.switchToDefaultContent();
+
+            // Click on the YouTube close button
+            homePage.clickYtVidCloseBtn();
+
+            // Wait for the player to be hidden
+            homePage.waitUntilPlayerHidden();
+
+            // Verify the player is hidden;
+            softAssert.assertFalse(homePage.isPlayerDisplayed(), "Player is still displayed");
+
+            //Check for any soft assert failures
+            softAssert.assertAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @TestCaseID(id = "QA-TC-133", description = "Test")
+    @TestCaseType(types = {TestType.FUNCTIONAL})
+    @Test(priority = 2)
+    public void validateWatchProdoVideoFunctionality() {
+        try {
             // Click on the Prodo Video button
             homePage.clickProdoVidBtn();
+
+            // Wait for the player to load
+            homePage.waitUntilPlayerDisplayed();
+
+            // Verify the player is displayed
+            softAssert.assertTrue(homePage.isPlayerDisplayed(), "Player is not displayed");
+
+            // Verify iframe (Youtube) is loaded
+            softAssert.assertTrue(homePage.getIFrameSrc().contains("youtube"), "Iframe is not loaded");
+
+            // Switch to the iframe
+            homePage.switchToIFrame();
+
+            // Verify the video state
+            softAssert.assertTrue(homePage.isYtVidPlyBtnDisplayed(), "YouTube play button is not displayed");
+
+            // Switch back to the default content
+            homePage.switchToDefaultContent();
+
+            // Click on the YouTube close button
+            homePage.clickYtVidCloseBtn();
+
+            // Wait for the player to be hidden
+            homePage.waitUntilPlayerHidden();
+
+            // Verify the player is hidden;
+            softAssert.assertFalse(homePage.isPlayerDisplayed(), "Player is still displayed");
+
+            //Check for any soft assert failures
+            softAssert.assertAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @TestCaseID(id = "QA-TC-133", description = "Test")
+    @TestCaseType(types = {TestType.FUNCTIONAL})
+    @Test(priority = 3)
+    public void validateSEGVideoFunctionality() throws InterruptedException {
+        try {
+            // Scroll to the SEG Video view
+            homePage.scrollToSegVidView();
+
+            Thread.sleep(1000);
+
+            // Click on the SEG Video button
+            homePage.clickSegVidBtn();
 
             // Wait for the player to load
             homePage.waitUntilPlayerDisplayed();
